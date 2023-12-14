@@ -53,7 +53,7 @@ function ContentPage() {
                           When it comes to the user interface, I'm your go-to person with expertise in React.js. 
                         </p></span>
                         <br />
-                      <a className={style.anchor} href="https://drive.google.com/file/d/1DRizwD75Smmul9AJuCwofK3uWGU16uR1/view?usp=drivesdk">View Resume</a>
+                      <a className={style.anchor} href="https://drive.google.com/file/d/1dWi2Qw1tKmsomUNpxRhT8jb3fAuW6Kf7/view?usp=drivesdk">View Resume</a>
                 </article>
                 <article>
                         <div className={style.frame}>
