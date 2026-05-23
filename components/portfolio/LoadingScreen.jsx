@@ -63,7 +63,7 @@ export default function LoadingScreen() {
                 boxShadow: '0 0 30px rgba(0,220,255,0.2)',
               }}
             >
-              AC
+              RS
             </div>
           </motion.div>
 
@@ -88,21 +88,6 @@ export default function LoadingScreen() {
             />
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            style={{
-              marginTop: '1rem',
-              fontSize: '0.75rem',
-              color: 'rgba(255,255,255,0.3)',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              fontFamily: 'JetBrains Mono, monospace',
-            }}
-          >
-            Loading Experience
-          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>
