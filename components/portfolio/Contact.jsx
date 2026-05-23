@@ -58,6 +58,7 @@ export default function Contact() {
     } catch (error) {
       console.error(error);
       setStatus('error');
+      setTimeout(() => setStatus(null), 5000);
     }
   };
 
@@ -71,12 +72,14 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding" style={{ position: 'relative', zIndex: 1 }}>
+    <section id="contact" className="section-padding" style={{ position: 'relative', zIndex: 1, padding: '4rem 1.5rem' }}>
       <div style={{
         position: 'absolute', bottom: '10%', right: '5%',
         width: 400, height: 400,
         background: 'radial-gradient(circle, rgba(0,220,255,0.04) 0%, transparent 70%)',
         pointerEvents: 'none',
+        display: 'none', // Hide on mobile
+        '@media (min-width: 768px)': { display: 'block' } // Show only on desktop
       }} />
 
       {status === 'error' && (
@@ -87,6 +90,12 @@ export default function Contact() {
             gap: '0.5rem',
             color: '#ff6b6b',
             marginBottom: '1rem',
+            maxWidth: '1100px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            padding: '0.75rem',
+            background: 'rgba(255,107,107,0.1)',
+            borderRadius: '8px',
           }}
         >
           <AlertCircle size={18} />
@@ -102,7 +111,7 @@ export default function Contact() {
           animate={inView ? 'show' : 'hidden'}
         >
           {/* Header */}
-          <motion.div variants={itemVariants} style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <motion.div variants={itemVariants} style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <span style={{
               display: 'inline-block', padding: '0.3rem 0.9rem', borderRadius: '100px',
               background: 'rgba(0,220,255,0.06)', border: '1px solid rgba(0,220,255,0.15)',
@@ -119,22 +128,37 @@ export default function Contact() {
               Let's <span className="gradient-text">Work Together</span>
             </h2>
             <p style={{
-              marginTop: '1rem', fontSize: '1rem', color: 'rgba(255,255,255,0.4)',
+              marginTop: '1rem', fontSize: 'clamp(0.875rem, 4vw, 1rem)', color: 'rgba(255,255,255,0.4)',
               maxWidth: 520, margin: '1rem auto 0', lineHeight: 1.7,
+              padding: '0 1rem',
             }}>
               Whether you have a project in mind, want to collaborate, or just want to say hi —
               my inbox is always open.
             </p>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }} className="lg:grid-cols-5">
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            gap: '2rem',
+            '@media (min-width: 1024px)': { 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              flexDirection: 'unset'
+            }
+          }}>
             {/* Left: info + social */}
             <motion.div
               variants={containerVariants}
-              style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', gridColumn: 'span 2' }}
+              style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '1.5rem',
+                '@media (min-width: 1024px)': { gridColumn: 'span 2' }
+              }}
             >
               {/* Contact info */}
-              <motion.div variants={itemVariants} className="gradient-border-card" style={{ padding: '1.75rem' }}>
+              <motion.div variants={itemVariants} className="gradient-border-card" style={{ padding: '1.5rem' }}>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f0f0f8', marginBottom: '1.25rem' }}>
                   Contact Info
                 </h3>
@@ -152,7 +176,14 @@ export default function Contact() {
                         <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.3)', marginBottom: '0.1rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'JetBrains Mono' }}>
                           {label}
                         </div>
-                        <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', fontWeight: 500 }}>{value}</div>
+                        <div style={{ 
+                          fontSize: 'clamp(0.75rem, 3.5vw, 0.85rem)', 
+                          color: 'rgba(255,255,255,0.75)', 
+                          fontWeight: 500,
+                          wordBreak: 'break-word'
+                        }}>
+                          {value}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -160,11 +191,16 @@ export default function Contact() {
               </motion.div>
 
               {/* Social */}
-              <motion.div variants={itemVariants} className="gradient-border-card" style={{ padding: '1.75rem' }}>
+              <motion.div variants={itemVariants} className="gradient-border-card" style={{ padding: '1.5rem' }}>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f0f0f8', marginBottom: '1.25rem' }}>
                   Follow Me
                 </h3>
-                <div style={{ display: 'flex', flexDirection: 'row', gap: '0.75rem' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                  '@media (min-width: 480px)': { flexDirection: 'row' }
+                }}>
                   {socialLinks.map(({ icon: Icon, label, handle, href, color }) => (
                     <a
                       key={label}
@@ -172,11 +208,17 @@ export default function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        display: 'flex', alignItems: 'center', gap: '0.875rem',
-                        padding: '0.75rem', borderRadius: '10px',
-                        background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
-                        textDecoration: 'none', transition: 'border-color 0.2s, background 0.2s',
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '0.875rem',
+                        padding: '0.75rem', 
+                        borderRadius: '10px',
+                        background: 'rgba(255,255,255,0.03)', 
+                        border: '1px solid rgba(255,255,255,0.06)',
+                        textDecoration: 'none', 
+                        transition: 'border-color 0.2s, background 0.2s',
                         cursor: 'pointer',
+                        flex: 1,
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.borderColor = `${color}30`;
@@ -202,7 +244,10 @@ export default function Contact() {
             <motion.div
               variants={itemVariants}
               className="gradient-border-card"
-              style={{ padding: '2rem', gridColumn: 'span 3' }}
+              style={{ 
+                padding: '1.5rem',
+                '@media (min-width: 1024px)': { gridColumn: 'span 3', padding: '2rem' }
+              }}
             >
               <h3 style={{ fontSize: '1rem', fontWeight: 600, color: '#f0f0f8', marginBottom: '1.5rem' }}>
                 Send a Message
@@ -214,7 +259,7 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1 }}
                   style={{
                     display: 'flex', flexDirection: 'column', alignItems: 'center',
-                    justifyContent: 'center', gap: '1rem', padding: '3rem 1rem',
+                    justifyContent: 'center', gap: '1rem', padding: '2rem 1rem',
                     textAlign: 'center',
                   }}
                 >
@@ -226,7 +271,17 @@ export default function Contact() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    gap: '1rem',
+                    '@media (min-width: 640px)': { 
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gap: '1rem',
+                      flexDirection: 'unset'
+                    }
+                  }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.4rem', fontWeight: 500, letterSpacing: '0.04em' }}>
                         Full Name
@@ -239,6 +294,7 @@ export default function Contact() {
                         required
                         placeholder="John Doe"
                         className="form-input"
+                        style={{ width: '100%' }}
                       />
                     </div>
                     <div>
@@ -253,6 +309,7 @@ export default function Contact() {
                         required
                         placeholder="john@example.com"
                         className="form-input"
+                        style={{ width: '100%' }}
                       />
                     </div>
                   </div>
@@ -269,6 +326,7 @@ export default function Contact() {
                       required
                       placeholder="Project inquiry..."
                       className="form-input"
+                      style={{ width: '100%' }}
                     />
                   </div>
 
@@ -284,7 +342,7 @@ export default function Contact() {
                       rows={5}
                       placeholder="Tell me about your project..."
                       className="form-input"
-                      style={{ resize: 'vertical', minHeight: 120 }}
+                      style={{ resize: 'vertical', minHeight: 120, width: '100%' }}
                     />
                   </div>
 
@@ -302,15 +360,15 @@ export default function Contact() {
                       color: status === 'sending' ? '#00dcff' : '#050508',
                       fontWeight: 600,
                       fontSize: '0.95rem',
-                      cursor: status === 'sending' ? 'not-allowed' : 'none',
+                      cursor: status === 'sending' ? 'not-allowed' : 'pointer',
                       border: status === 'sending' ? '1px solid rgba(0,220,255,0.3)' : 'none',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '0.5rem',
                       transition: 'opacity 0.2s',
-                      alignSelf: 'flex-start',
-                      minWidth: 160,
+                      width: '100%',
+                      '@media (min-width: 640px)': { width: 'auto', alignSelf: 'flex-start' }
                     }}
                   >
                     {status === 'sending' ? (
