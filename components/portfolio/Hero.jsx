@@ -79,7 +79,7 @@ export default function Hero() {
           textAlign: 'center',
           position: 'relative',
           zIndex: 1,
-          paddingTop: '5rem',
+          paddingTop: '3rem',
         }}
       >
         {/* Badge */}
