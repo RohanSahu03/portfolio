@@ -22,12 +22,12 @@ const experiences = [
   color: '#00dcff',
 },
 {
-  company: 'Parnets Software India Pvt. Ltd.',
-  role: 'Web Developer',
-  location: 'Bangalore, KA, India',
-  duration: 'March 2024 - February 2025',
+  company: 'L.P. Engineering Works',
+  role: 'Junior Software Engineer',
+  location: 'Pune, MH, India',
+  duration: 'March 2023 - February 2025',
   type: 'Full-time',
-  description: 'Worked on full-stack web applications including Engineering Solutions ERP and DailyDish, developing responsive interfaces, backend APIs, authentication systems, and database-driven features using the MERN stack.',
+  description: 'Worked on full-stack web applications including Engineering Solutions ERP , developing responsive interfaces, backend APIs, authentication systems, and database-driven features using the MERN stack.',
   achievements: [
     'Developed ERP modules for managing quotations, invoices, inventory, purchase orders, and dispatch operations',
     'Built and integrated REST APIs with JWT authentication for secure user access and role management',
